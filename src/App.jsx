@@ -1,55 +1,37 @@
 import "./App.css";
+import { useState } from "react";
 import FormComplexos from "./components/FormComplexos";
 import FormSimples from "./components/FormSimples";
+import FormIdade from "./components/FormIdade";
+import FormLogin from "./components/FormLogin";
+import MusicList from "./components/MusicList";
 
 function App() {
-   return (
-      <>
-         <div>
-            <h1>Form Simples</h1>
-            <p>
-               São formulários que cuidam apenas de um campo de input. Nesse
-               exemplo abaixo, o componente FormSimples tem apenas um campo
-               "Nome".
-            </p>
-            <p>
-               nota: como o state é referente a apenas um input, não tem
-               necessidade de guardar ele dentro de um objeto.
-            </p>
+  const [showMusicList, setShowMusicList] = useState(false);
 
-            <code>const [nome, setNome] = useState("");</code>
+  const toggleMusicList = () => {
+    setShowMusicList(!showMusicList);
+  };
 
-            <FormSimples />
-            {/* INVOCAR AQUI O COMPONENTE DO EXERCÍCIO FORM IDADE */}
-         </div>
-
-         <div className="notas">
-            <p>
-               O React não tem um sistema de formulários, então é necessário
-               criar um state para cada campo de input, então se tornam inputs
-               controlados, ou seja, possuem um atributo value que é atribuido a
-               um state. Quando o usuário digita algo no input, o state é
-               atualizado e o input é renderizado novamente com o novo valor.
-            </p>
-         </div>
-
-         <div>
-            <h1>Form Complexo </h1>
-            <p>
-               São formulários que possuem vários inputs atribuidos a um mesmo
-               state. É criado um objeto onde cada propriedade é resposável por
-               guardar o valor de um input. No exemplo abaixo, o componente
-               FormComplexo tem dois campos "Nome" e "Idade".
-            </p>
-            <small>Olhe seu console enquanto digita</small>
-
-            <FormComplexos />
-            {/* INVOCAR AQUI O COMPONENTE DO EXERCÍCIO FORM LOGIN */}
-         </div>
-
-         <div id="EXERCÍCIO 3 COLOCAR DENTRO DESSA DIV"></div>
-      </>
-   );
+  return (
+    <>
+      <div className="exercicio">
+        <h1>Form de Idade</h1>
+        <FormIdade />
+      </div>
+      <div className="exercicio">
+        <h1>Form de Login</h1>
+        <FormLogin />
+      </div>
+      <div className="exercicio">
+        <h1>Form de Músicas</h1>
+        <button onClick={toggleMusicList}>
+          {showMusicList ? "Hide Add Song Form" : "Show Add Song Form"}
+        </button>
+        {showMusicList && <MusicList />}
+      </div>
+    </>
+  );
 }
 
 export default App;
